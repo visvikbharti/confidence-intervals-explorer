@@ -2,6 +2,9 @@
 
 An interactive educational application for exploring and understanding confidence intervals in statistics.
 
+**Developed by: Vishal Bharti**
+**Version: 1.0**
+**Date: 2025-04-12
 ## Overview
 
 The Confidence Intervals Explorer is a comprehensive educational tool designed to help students, researchers, and practitioners understand the concept of confidence intervals in statistics. This application provides interactive visualizations, simulations, and detailed explanations that bridge the gap between theoretical foundations and practical applications.
