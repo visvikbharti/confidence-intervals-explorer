@@ -75,6 +75,8 @@ streamlit run app.py
 
 The application will open in your default web browser at `http://localhost:8501`.
 
+## Live Demo
+[Access the live application on Streamlit Cloud](https://visvikbharti-confidence-intervals-explorer.streamlit.app/)
 ## Compatibility Notes
 
 ### Plotly Version Compatibility
