@@ -8,7 +8,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from scipy.optimize import minimize, minimize_scalar
-import math
+from custom_styling import get_custom_css, get_footer
+from latex_helper import render_latex, render_definition, render_example, render_proof, render_key_equation
+from force_visible_math import setup_math_rendering
 
 # Set page configuration
 st.set_page_config(
@@ -18,19 +20,11 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS to enhance the UI
-st.markdown("""
-<style>
-    .main .block-container {padding-top: 2rem;}
-    h1, h2, h3 {margin-top: 0.8rem; margin-bottom: 0.8rem;}
-    .stTabs [data-baseweb="tab-panel"] {padding-top: 1rem;}
-    .stAlert {margin-top: 1rem; margin-bottom: 1rem;}
-    .math-block {overflow-x: auto; padding: 10px; margin: 10px 0;}
-    .proof {margin-left: 20px; border-left: 3px solid #4CAF50; padding-left: 10px;}
-    .definition {background-color: #f0f8ff; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-    .example {background-color: #f0fff0; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-</style>
-""", unsafe_allow_html=True)
+# Apply custom CSS for better formula display in both light and dark modes
+st.markdown(get_custom_css(), unsafe_allow_html=True)
+
+# Apply enhanced math rendering fixes
+setup_math_rendering()
 
 # Home page content
 def main():
@@ -87,6 +81,10 @@ def main():
         
         st.plotly_chart(fig, use_container_width=True)
         
+        # Example of properly rendered LaTeX formula
+        st.markdown("### Key Formula")
+        render_latex(r"CI_{1-\alpha}(\mu) = \bar{X} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}", block=True)
+        
         # Quick navigation buttons
         st.markdown("### Quick Access")
         col1, col2 = st.columns(2)
@@ -98,13 +96,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Add at the bottom of app.py
+# Add footer at the bottom of app.py
 st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center; color: #666; padding: 10px; margin-top: 30px; font-size: 0.8em;">
-        <p>© 2025 Designed and developed by <b>Vishal Bharti</b> | Advanced Confidence Intervals Explorer for PhD-Level Statistics</p>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
+st.markdown(get_footer(), unsafe_allow_html=True)

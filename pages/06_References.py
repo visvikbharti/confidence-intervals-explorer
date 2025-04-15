@@ -6,49 +6,20 @@ import seaborn as sns
 import scipy.stats as stats
 import plotly.express as px
 import plotly.graph_objects as go
-
+from custom_styling import get_custom_css, get_footer
+from force_visible_math import force_visible_math_mode, inline_math_fix
+from force_visible_math import setup_math_rendering
+from latex_helper import add_latex_styles
 st.set_page_config(
     page_title="References & Resources - CI Explorer",
     page_icon="📊",
     layout="wide",
 )
-
-# Custom CSS
-st.markdown("""
-<style>
-    .main .block-container {padding-top: 2rem;}
-    h1, h2, h3 {margin-top: 0.8rem; margin-bottom: 0.8rem;}
-    .stTabs [data-baseweb="tab-panel"] {padding-top: 1rem;}
-    .stAlert {margin-top: 1rem; margin-bottom: 1rem;}
-    .math-block {overflow-x: auto; padding: 10px; margin: 10px 0;}
-    .proof {margin-left: 20px; border-left: 3px solid #4CAF50; padding-left: 10px;}
-    .definition {background-color: #f0f8ff; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-    .example {background-color: #f0fff0; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-    .ref-card {
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        padding: 15px;
-        margin-bottom: 15px;
-        border-left: 4px solid #4CAF50;
-    }
-    .ref-title {
-        font-weight: bold;
-        color: #2C3E50;
-        margin-bottom: 5px;
-    }
-    .ref-authors {
-        font-style: italic;
-        color: #34495E;
-        margin-bottom: 5px;
-    }
-    .ref-journal {
-        color: #7F8C8D;
-    }
-    .ref-link {
-        margin-top: 5px;
-    }
-</style>
-""", unsafe_allow_html=True)
+st.markdown(get_custom_css(), unsafe_allow_html=True)
+add_latex_styles()
+setup_math_rendering()
+# Apply the custom CSS
+st.markdown(get_custom_css(), unsafe_allow_html=True)
 
 st.header("References & Resources")
 
@@ -394,12 +365,6 @@ with tabs[4]:  # About This App
 
 # At the bottom of your app.py file, add this code:
 
+# Add footer
 st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center; color: grey; padding: 10px;'>
-        <p>Designed and developed by Vishal Bharti © 2025 | PhD-Level Confidence Intervals Explorer</p>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
+st.markdown(get_footer(), unsafe_allow_html=True)

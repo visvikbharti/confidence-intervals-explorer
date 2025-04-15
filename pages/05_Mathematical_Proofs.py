@@ -7,26 +7,22 @@ import scipy.stats as stats
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
+from custom_styling import get_custom_css, get_footer
+from latex_helper import render_latex, render_definition, render_example, render_proof, render_key_equation
+from force_visible_math import force_visible_math_mode, inline_math_fix
+from force_visible_math import setup_math_rendering
+from latex_helper import add_latex_styles
 st.set_page_config(
     page_title="Mathematical Proofs - CI Explorer",
     page_icon="📊",
     layout="wide",
 )
-
+st.markdown(get_custom_css(), unsafe_allow_html=True)
+add_latex_styles()
+setup_math_rendering()
 # Custom CSS
-st.markdown("""
-<style>
-    .main .block-container {padding-top: 2rem;}
-    h1, h2, h3 {margin-top: 0.8rem; margin-bottom: 0.8rem;}
-    .stTabs [data-baseweb="tab-panel"] {padding-top: 1rem;}
-    .stAlert {margin-top: 1rem; margin-bottom: 1rem;}
-    .math-block {overflow-x: auto; padding: 10px; margin: 10px 0;}
-    .proof {margin-left: 20px; border-left: 3px solid #4CAF50; padding-left: 10px;}
-    .definition {background-color: #f0f8ff; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-    .example {background-color: #f0fff0; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;}
-</style>
-""", unsafe_allow_html=True)
+# Apply the custom CSS
+st.markdown(get_custom_css(), unsafe_allow_html=True)
 
 st.header("Mathematical Proofs and Derivations")
 
@@ -833,12 +829,6 @@ elif proof_type == "Confidence vs. Credible Intervals":
 
 # At the bottom of your app.py file, add this code:
 
+# Add footer
 st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center; color: grey; padding: 10px;'>
-        <p>Designed and developed by Vishal Bharti © 2025 | PhD-Level Confidence Intervals Explorer</p>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
+st.markdown(get_footer(), unsafe_allow_html=True)
