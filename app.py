@@ -10,7 +10,7 @@ from plotly.subplots import make_subplots
 from scipy.optimize import minimize, minimize_scalar
 from custom_styling import get_custom_css, get_footer
 from latex_helper import render_latex, render_definition, render_example, render_proof, render_key_equation
-from force_visible_math import setup_math_rendering
+from force_visible_math import force_visible_math_mode, inline_math_fix
 
 # Set page configuration
 st.set_page_config(
@@ -23,8 +23,9 @@ st.set_page_config(
 # Apply custom CSS for better formula display in both light and dark modes
 st.markdown(get_custom_css(), unsafe_allow_html=True)
 
-# Apply enhanced math rendering fixes
-setup_math_rendering()
+# Apply the force_visible_math and inline_math_fix functions
+force_visible_math_mode()
+inline_math_fix()
 
 # Home page content
 def main():
@@ -81,17 +82,40 @@ def main():
         
         st.plotly_chart(fig, use_container_width=True)
         
-        # Example of properly rendered LaTeX formula
-        st.markdown("### Key Formula")
-        render_latex(r"CI_{1-\alpha}(\mu) = \bar{X} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}", block=True)
+        # Key Formula section with both t and z formulas
+        st.markdown("### Key Formulas")
+        
+        # Formula 1: t-distribution (unknown variance)
+        st.markdown("""
+        <div class="key-equation">
+        <strong>Confidence Interval for Mean (Unknown Variance):</strong>
+
+        $$CI_{1-\\alpha}(\\mu) = \\bar{X} \\pm t_{\\alpha/2, n-1} \\cdot \\frac{s}{\\sqrt{n}}$$
+
+        This provides a $(1-\\alpha)$ confidence level for the population mean $\\mu$ when the population variance is unknown.
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Formula 2: z-distribution (known variance)
+        st.markdown("""
+        <div class="key-equation">
+        <strong>Confidence Interval for Mean (Known Variance):</strong>
+
+        $$CI_{1-\\alpha}(\\mu) = \\bar{X} \\pm z_{\\alpha/2} \\cdot \\frac{\\sigma}{\\sqrt{n}}$$
+
+        This provides a $(1-\\alpha)$ confidence level for the population mean $\\mu$ when the population variance $\\sigma^2$ is known.
+        </div>
+        """, unsafe_allow_html=True)
         
         # Quick navigation buttons
         st.markdown("### Quick Access")
         col1, col2 = st.columns(2)
         with col1:
-            st.button("Simulations", key="sim_button", on_click=lambda: st.switch_page("pages/02_Interactive_Simulations.py"))
+            if st.button("Simulations", key="sim_button"):
+                st.switch_page("pages/02_Interactive_Simulations.py")
         with col2:
-            st.button("Problem Sets", key="prob_button", on_click=lambda: st.switch_page("pages/05_Mathematical_Proofs.py"))
+            if st.button("Problem Sets", key="prob_button"):
+                st.switch_page("pages/04_Real_World_Applications.py")
 
 if __name__ == "__main__":
     main()
