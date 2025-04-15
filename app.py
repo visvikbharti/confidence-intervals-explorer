@@ -32,7 +32,8 @@ st.markdown(get_custom_css(), unsafe_allow_html=True)
 force_visible_math_mode()
 inline_math_fix()
 
-# Add custom CSS for the professional banner
+# Add custom CSS for the professional banner with increased font size for the tagline
+# and improved button styling
 st.markdown("""
 <style>
 /* Professional banner styling */
@@ -55,8 +56,8 @@ st.markdown("""
 }
 
 .banner-tagline {
-    font-size: 1.2rem;
-    font-weight: 400;
+    font-size: 1.8rem; /* Increased from 1.5rem for better visibility */
+    font-weight: 500; /* Increased from 400 for better visibility */
     font-style: italic;
     text-align: center;
     margin-top: 0.75rem;
@@ -110,38 +111,54 @@ st.markdown("""
     color: white;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.module-button {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    margin-top: 10px;
-}
-.module-button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
 
-/* Navigation button styling */
-.nav-button {
-    background-color: #4a5568;
+/* Improved button styling for Streamlit buttons */
+/* Blue button for Foundations */
+div.stButton:nth-of-type(1) > button {
+    background-color: rgba(29, 78, 216, 0.8);
     color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
     border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
+    width: 100%;
+    margin-top: 0.5rem;
     transition: background-color 0.3s ease;
 }
+div.stButton:nth-of-type(1) > button:hover {
+    background-color: rgba(30, 64, 175, 1);
+}
 
-.nav-button:hover {
-    background-color: #2d3748;
+/* Green button for Simulations */
+div.stButton:nth-of-type(2) > button {
+    background-color: rgba(6, 95, 70, 0.8);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+div.stButton:nth-of-type(2) > button:hover {
+    background-color: rgba(6, 78, 59, 1);
+}
+
+/* Purple button for Applications */
+div.stButton:nth-of-type(3) > button {
+    background-color: rgba(79, 70, 229, 0.8);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+div.stButton:nth-of-type(3) > button:hover {
+    background-color: rgba(67, 56, 202, 1);
 }
 
 /* Ensure content appears correctly */
@@ -298,11 +315,10 @@ def main():
         <div class="module-card-blue">
             <h3 style="margin-top:0;">Theoretical Foundations</h3>
             <p>Definitions, properties, and interpretations of confidence intervals. Learn the mathematical basis and statistical principles.</p>
-            <a href="javascript:document.getElementById('foundations_button').click();" class="module-button">Explore Foundations</a>
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("Explore Foundations", key="foundations_button", help="Navigate to Theoretical Foundations"):
+        if st.button("Explore Foundations", help="Navigate to Theoretical Foundations"):
             st.switch_page("pages/01_Theoretical_Foundations.py")
     
     with col2:
@@ -310,11 +326,10 @@ def main():
         <div class="module-card-green">
             <h3 style="margin-top:0;">Interactive Simulations</h3>
             <p>Hands-on demonstrations of coverage properties, sample size effects, and confidence interval behavior.</p>
-            <a href="javascript:document.getElementById('sim_button').click();" class="module-button">Try Simulations</a>
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("Try Simulations", key="sim_button", help="Navigate to Interactive Simulations"):
+        if st.button("Try Simulations", help="Navigate to Interactive Simulations"):
             st.switch_page("pages/02_Interactive_Simulations.py")
     
     with col3:
@@ -322,11 +337,10 @@ def main():
         <div class="module-card-purple">
             <h3 style="margin-top:0;">Real-world Applications</h3>
             <p>Examples from clinical trials, A/B testing, environmental monitoring, and quality control.</p>
-            <a href="javascript:document.getElementById('app_button').click();" class="module-button">View Applications</a>
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("View Applications", key="app_button", help="Navigate to Real-world Applications"):
+        if st.button("View Applications", help="Navigate to Real-world Applications"):
             st.switch_page("pages/04_Real_World_Applications.py")
 
 if __name__ == "__main__":
